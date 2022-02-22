@@ -1,0 +1,32 @@
+@import url("../../../styles/variables.css");
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+.links {
+    display: flex;
+    margin-left: -10px;
+}
+
+.link {
+    padding: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--header-links-color);
+    transition: color 0.3s ease 0s;
+}
+/*.link:first-child {*/
+/*    padding-left: 0;*/
+/*}*/
+.link:hover{
+    color: var(--header-links-hover);
+}
+
+.account {
+    display: flex;
+    gap: 10px;
+}

@@ -1,0 +1,6 @@
+@import url("../../styles/variables.css");
+
+.header {
+    background-color: var(--bg-dark-color);
+    padding: 25px 0;
+}
