@@ -19,9 +19,11 @@
     color: var(--header-links-color);
     transition: color 0.3s ease 0s;
 }
-/*.link:first-child {*/
-/*    padding-left: 0;*/
-/*}*/
+
+.link_active {
+    color: var(--header-links-hover);
+}
+
 .link:hover{
     color: var(--header-links-hover);
 }
