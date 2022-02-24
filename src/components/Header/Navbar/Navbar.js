@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import classes from "./Navbar.module.css";
 import Account from "./Account/Account";
+import Search from "./Search/Search";
 
 const Navbar = () => {
 
@@ -44,6 +45,7 @@ const Navbar = () => {
                     )
                 })}
             </div>
+            <Search/>
             <Account/>
         </nav>
     );
