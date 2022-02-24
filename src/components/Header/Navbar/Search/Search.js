@@ -10,7 +10,11 @@ const Search = () => {
     function showSearch(event) {
         event.preventDefault();
         setShow(prevState => !prevState);
-        inputRef.current.focus();
+        if (show) {
+            inputRef.current.blur();
+        } else {
+            inputRef.current.focus();
+        }
     };
 
     return (
