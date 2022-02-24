@@ -2,10 +2,17 @@ import React from 'react';
 import classes from "./Button.module.css";
 
 const Button = ({type}) => {
-    if (type === "login") {
-        return (
-            <a href="/" className={`${classes.btn} ${classes.login}`}>Войти</a>
-        )
+
+    switch (type) {
+        case "login":
+            return (
+                <button
+                    type="button"
+                    className={`${classes.btn} ${classes.login}`}
+                >
+                    Войти
+                </button>
+            )
     }
 };
 
