@@ -10,7 +10,6 @@
 }
 
 .input {
-    display: block;
     width: 0%;
     height: 35px;
     border: none;
@@ -21,6 +20,8 @@
     padding: 0;
     color: var(--header-links-color);
     font-size: 16px;
+    font-family: inherit;
+    outline: none;
 }
 
 .input::placeholder {
@@ -49,7 +50,7 @@
     border: none;
     background-color: var(--input-bg-color);
     cursor: pointer;
-    /*transform: translateX(50%);*/
+    outline: none;
 }
 
 .icon {
