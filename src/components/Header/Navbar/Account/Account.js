@@ -4,14 +4,14 @@ import Button from "../../../UI/Button/Button";
 
 const Account = () => {
 
-    function onLoginClick(event) {
+    const onLoginClick = (event) => {
         event.preventDefault();
     }
 
     return (
         <div className={classes.account}>
             <a href="" className={classes.link}>Аккаунт</a>
-            <Button type="login" onClick={(event) => onLoginClick(event)}/>
+            <Button name="login" onClick={(event) => onLoginClick(event)}>Войти</Button>
         </div>
     );
 };

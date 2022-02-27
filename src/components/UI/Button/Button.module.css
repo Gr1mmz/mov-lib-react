@@ -12,6 +12,11 @@
     color: #fff;
     text-decoration: none;
     transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--accent-color-hover);
 }
 
 .login {

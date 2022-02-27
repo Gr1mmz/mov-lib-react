@@ -5,3 +5,11 @@
     justify-content: center;
     gap: 30px;
 }
+
+.pagination {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}

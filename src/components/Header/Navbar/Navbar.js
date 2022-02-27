@@ -15,7 +15,7 @@ const Navbar = () => {
         {
             name: "popular",
             url: "popular",
-            text: "Популярные",
+            text: "Популярные сейчас",
         },
         {
             name: "genres",

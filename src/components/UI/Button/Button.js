@@ -1,16 +1,27 @@
 import React from 'react';
 import classes from "./Button.module.css";
 
-const Button = ({type}) => {
+const Button = ({name, children, onClick}) => {
 
-    switch (type) {
+    switch (name) {
         case "login":
             return (
                 <button
+                    onClick={onClick}
                     type="button"
                     className={`${classes.btn} ${classes.login}`}
                 >
-                    Войти
+                    {children}
+                </button>
+            )
+        case "pagination":
+            return (
+                <button
+                    onClick={onClick}
+                    type="button"
+                    className={`${classes.btn}`}
+                >
+                    {children}
                 </button>
             )
     }
