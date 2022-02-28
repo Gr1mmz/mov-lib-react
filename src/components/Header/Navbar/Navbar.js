@@ -14,7 +14,7 @@ const Navbar = () => {
         },
         {
             name: "popular",
-            url: "popular",
+            url: "popular/1",
             text: "Популярные сейчас",
         },
         {

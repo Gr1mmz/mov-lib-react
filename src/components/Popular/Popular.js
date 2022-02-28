@@ -1,24 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {getPopular, transformMovie, API_POPULAR} from "../../API/API";
+import {API_POPULAR} from "../../API/API";
 import classes from "./Popular.module.css";
 import Movie from "../UI/Movie/Movie";
 import Spinner from "../UI/Spinner/Spinner";
 import Button from "../UI/Button/Button";
+import {useLocation, Link} from "react-router-dom";
 
-const Popular = () => {
+const Popular = ({startPage}) => {
+    const location = useLocation();
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
+    //parseInt(location.pathname.slice(9))
+
     useEffect(() => {
         async function fetchData() {
             return await fetch(`${API_POPULAR}&page=${page}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
+                .then(() => console.log(page))
                 .then(() => setLoading(false));
         };
         fetchData();
         window.scrollTo(0, 0);
-    }, [page]);
+    }, [location.pathname]);
 
     const nextPage = () => {
         setLoading(true);
@@ -44,13 +49,17 @@ const Popular = () => {
                 {loading ? <Spinner/> : moviesElements}
             </div>
             <div className={classes.pagination}>
-                <Button name="pagination" onClick={() => prevPage()}>
-                    &lt; Назад
-                </Button>
+                <Link to={`${page !== 1 ? page - 1 : page}`}>
+                    <Button name="pagination" onClick={() => prevPage()}>
+                        &lt; Назад
+                    </Button>
+                </Link>
                 {page}
-                <Button name="pagination" onClick={() => nextPage()}>
-                    Вперед &gt;
-                </Button>
+                <Link to={`${page + 1}`}>
+                    <Button name="pagination" onClick={() => nextPage()}>
+                        Вперед &gt;
+                    </Button>
+                </Link>
             </div>
         </div>
     );

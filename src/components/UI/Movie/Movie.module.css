@@ -2,6 +2,9 @@
 
 .movie {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 270px;
     height: 406px;
     background-color: #000000;
@@ -14,12 +17,13 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+    will-change: transform;
     transition: all 0.3s ease 0s;
 }
 
 .movie:hover.movie img {
     opacity: 0.5;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .movie:hover .header,
