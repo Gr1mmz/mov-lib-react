@@ -6,33 +6,31 @@ import Spinner from "../UI/Spinner/Spinner";
 import Button from "../UI/Button/Button";
 import {useLocation, Link} from "react-router-dom";
 
-const Popular = ({startPage}) => {
+const Popular = () => {
     const location = useLocation();
+    const page = parseInt(location.pathname.slice(9));
     const [movies, setMovies] = useState([]);
-    const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
-    //parseInt(location.pathname.slice(9))
 
     useEffect(() => {
         async function fetchData() {
             return await fetch(`${API_POPULAR}&page=${page}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
-                .then(() => console.log(page))
+                // .then(() => console.log(page))
+                // .then(() => console.log(location.pathname))
                 .then(() => setLoading(false));
         };
         fetchData();
         window.scrollTo(0, 0);
-    }, [location.pathname]);
+    }, [page]);
 
     const nextPage = () => {
         setLoading(true);
-        setPage(prev => prev + 1);
     };
     const prevPage = () => {
         if (page !== 1) {
             setLoading(true);
-            setPage(prev => prev - 1);
         }
     };
 
