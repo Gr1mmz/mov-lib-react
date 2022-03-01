@@ -3,8 +3,8 @@ import {API_POPULAR} from "../../API/API";
 import classes from "./Popular.module.css";
 import Movie from "../UI/Movie/Movie";
 import Spinner from "../UI/Spinner/Spinner";
-import Button from "../UI/Button/Button";
-import {useLocation, Link} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+import Pagination from "../UI/Pagination/Pagination";
 
 const Popular = () => {
     const location = useLocation();
@@ -17,8 +17,6 @@ const Popular = () => {
             return await fetch(`${API_POPULAR}&page=${page}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
-                // .then(() => console.log(page))
-                // .then(() => console.log(location.pathname))
                 .then(() => setLoading(false));
         };
         fetchData();
@@ -46,19 +44,7 @@ const Popular = () => {
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
-            <div className={classes.pagination}>
-                <Link to={`${page !== 1 ? page - 1 : page}`}>
-                    <Button name="pagination" onClick={() => prevPage()}>
-                        &lt; Назад
-                    </Button>
-                </Link>
-                {page}
-                <Link to={`${page + 1}`}>
-                    <Button name="pagination" onClick={() => nextPage()}>
-                        Вперед &gt;
-                    </Button>
-                </Link>
-            </div>
+            <Pagination page={page} nextPage={nextPage} prevPage={prevPage} />
         </div>
     );
 };

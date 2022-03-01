@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from "./Button.module.css";
 
-const Button = ({name, children, onClick}) => {
+const Button = ({type, children, onClick}) => {
 
-    switch (name) {
+    switch (type) {
         case "login":
             return (
                 <button

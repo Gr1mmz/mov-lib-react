@@ -11,7 +11,7 @@ const Account = () => {
     return (
         <div className={classes.account}>
             <a href="" className={classes.link}>Аккаунт</a>
-            <Button name="login" onClick={(event) => onLoginClick(event)}>Войти</Button>
+            <Button type="login" onClick={(event) => onLoginClick(event)}>Войти</Button>
         </div>
     );
 };
