@@ -6,9 +6,9 @@ import Spinner from "../UI/Spinner/Spinner";
 import {useLocation} from "react-router-dom";
 import Pagination from "../UI/Pagination/Pagination";
 
-const Popular = () => {
+const Popular = ({startPage}) => {
     const location = useLocation();
-    const page = parseInt(location.pathname.slice(9));
+    const page = location.pathname.slice(9) ? parseInt(location.pathname.slice(9)) : 1;
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 

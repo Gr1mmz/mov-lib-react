@@ -16,7 +16,7 @@ function App() {
                 <Main>
                     <Routes>
                         <Route path="/" element={<Home/>} />
-                        <Route path="/popular/*" element={<Popular/>} />
+                        <Route path="/popular/*" element={<Popular startPage={1}/>} />
                         <Route path="/genres" element={<Genres/>} />
                         <Route path="/library" element={<Library/>} />
                     </Routes>
