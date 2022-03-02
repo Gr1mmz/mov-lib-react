@@ -7,6 +7,7 @@ import Popular from "./components/Popular/Popular";
 import Genres from "./components/Genres/Genres";
 import Library from "./components/Library/Library";
 import Footer from "./components/Footer/Footer";
+import SearchResults from "./components/SearchResults/SearchResults";
 
 function App() {
     return (
@@ -16,9 +17,10 @@ function App() {
                 <Main>
                     <Routes>
                         <Route path="/" element={<Home/>} />
-                        <Route path="/popular/*" element={<Popular startPage={1}/>} />
+                        <Route path="/popular/*" element={<Popular />} />
                         <Route path="/genres" element={<Genres/>} />
                         <Route path="/library" element={<Library/>} />
+                        <Route path="/search/*" element={<SearchResults/>} />
                     </Routes>
                 </Main>
                 <Footer/>

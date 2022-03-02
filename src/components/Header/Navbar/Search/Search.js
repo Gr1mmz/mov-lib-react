@@ -1,11 +1,17 @@
 import React, {useRef, useState} from 'react';
 import searchIcon from "./search.svg";
 import classes from "./Search.module.css";
+import {useNavigate, Link} from "react-router-dom";
 
 const Search = () => {
     const [show, setShow] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const inputRef = useRef(null);
+    const navigate = useNavigate();
+    const handlerOnSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/search/${inputValue}`);
+    }
 
     function showSearch(event) {
         event.preventDefault();
@@ -18,7 +24,7 @@ const Search = () => {
     };
 
     return (
-        <div className={classes.search}>
+        <form className={classes.search} onSubmit={handlerOnSubmit}>
             <input
                 className={show
                     ? `${classes.input} ${classes.active}`
@@ -29,10 +35,11 @@ const Search = () => {
                 onChange={event => setInputValue(event.target.value)}
                 ref={inputRef}
             />
-            <button className={classes.button} onClick={event => showSearch(event)}>
+            <a className={classes.button} onClick={event => showSearch(event)}>
                 <img className={classes.icon} src={searchIcon} alt="search"/>
-            </button>
-        </div>
+            </a>
+
+        </form>
     );
 };
 
