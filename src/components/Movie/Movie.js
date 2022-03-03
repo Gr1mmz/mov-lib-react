@@ -37,7 +37,6 @@ const Movie = () => {
             return await fetch(`${BASE_URL}/${link}/${id}?${API_KEY}${API_LANG}`)
                 .then(res => res.json())
                 .then(data => setMovie(data))
-                .then(() => console.log(movie))
                 .then(() => setLoading(false));
         }
         async function fetchTrailers() {

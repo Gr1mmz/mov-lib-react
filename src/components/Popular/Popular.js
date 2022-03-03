@@ -35,7 +35,7 @@ const Popular = () => {
 
     const moviesElements = movies.map(movie => {
         return (
-            <MovieItem type="poster" {...movie} key={movie.id}/>
+            <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
         )
     });
 
