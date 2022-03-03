@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {API_NEW_RELEASES} from "../../../API/API";
-import Movie from "../../UI/Movie/Movie";
+import MovieItem from "../../UI/MovieItem/MovieItem";
 import classes from "./NewReleases.module.css";
 import Spinner from "../../UI/Spinner/Spinner";
 
-const NewReleases = ({header, url}) => {
+const NewReleases = ({header, url, link}) => {
     const [newMovies, setNewMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -19,7 +18,7 @@ const NewReleases = ({header, url}) => {
 
     const moviesElements = newMovies.map(movie => {
         return (
-            <Movie type="backdrop" {...movie} key={movie.id}/>
+            <MovieItem type="backdrop" {...movie} key={movie.id} link={link}/>
         )
     }).slice(0, 10);
 

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {API_POPULAR} from "../../API/API";
 import classes from "./Popular.module.css";
-import Movie from "../UI/Movie/Movie";
+import MovieItem from "../UI/MovieItem/MovieItem";
 import Spinner from "../UI/Spinner/Spinner";
 import {useLocation} from "react-router-dom";
 import Pagination from "../UI/Pagination/Pagination";
@@ -20,32 +20,33 @@ const Popular = () => {
                 .then(() => setLoading(false));
         };
         fetchData();
-        window.scrollTo(0, 0);
     }, [page]);
 
     const nextPage = () => {
         setLoading(true);
+        window.scrollTo(0, 0);
     };
     const prevPage = () => {
         if (page !== 1) {
             setLoading(true);
+            window.scrollTo(0, 0);
         }
     };
 
     const moviesElements = movies.map(movie => {
         return (
-            <Movie type="poster" {...movie} key={movie.id}/>
+            <MovieItem type="poster" {...movie} key={movie.id}/>
         )
     });
 
     return (
-        <>
+        <div className="container">
             <h2>Популярные сейчас</h2>
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
             <Pagination page={page} nextPage={nextPage} prevPage={prevPage} />
-        </>
+        </div>
     );
 };
 

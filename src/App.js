@@ -8,6 +8,7 @@ import Genres from "./components/Genres/Genres";
 import Library from "./components/Library/Library";
 import Footer from "./components/Footer/Footer";
 import SearchResults from "./components/SearchResults/SearchResults";
+import Movie from "./components/Movie/Movie";
 
 function App() {
     return (
@@ -21,6 +22,8 @@ function App() {
                         <Route path="/genres" element={<Genres/>} />
                         <Route path="/library" element={<Library/>} />
                         <Route path="/search/*" element={<SearchResults/>} />
+                        <Route path="/movie/*" element={<Movie/>} />
+                        <Route path="/tv/*" element={<Movie/>} />
                     </Routes>
                 </Main>
                 <Footer/>

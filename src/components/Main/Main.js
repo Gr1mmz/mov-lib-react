@@ -12,9 +12,7 @@ const Main = ({children}) => {
                 backgroundPosition: "center",
                 backgroundSize: "cover",
             }}>
-            <div className="container">
-                {children}
-            </div>
+            {children}
         </main>
     );
 };

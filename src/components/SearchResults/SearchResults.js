@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {API_SEARCH} from "../../API/API";
-import Movie from "../UI/Movie/Movie";
+import MovieItem from "../UI/MovieItem/MovieItem";
 import classes from "../Popular/Popular.module.css";
 import Spinner from "../UI/Spinner/Spinner";
 
@@ -24,17 +24,17 @@ const SearchResults = () => {
 
     const moviesElements = movies.map(movie => {
         return (
-            <Movie type="poster" {...movie} key={movie.id}/>
+            <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
         )
     });
 
     return (
-        <>
+        <div className="container">
             <h2>Результаты поиска</h2>
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
-        </>
+        </div>
     );
 };
 
