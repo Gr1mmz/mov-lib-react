@@ -7,14 +7,14 @@ const NewReleases = ({header, url, link}) => {
     const [newMovies, setNewMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        async function fetchData() {
-            return await fetch(`${url}`)
+        function fetchData() {
+            return fetch(`${url}`)
                 .then(res => res.json())
                 .then(data => setNewMovies(data.results))
                 .then(() => setLoading(false));
         };
         fetchData();
-    }, []);
+    }, [url]);
 
     const moviesElements = newMovies.map(movie => {
         return (

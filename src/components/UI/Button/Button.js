@@ -14,7 +14,7 @@ const Button = ({type, children, onClick}) => {
                     {children}
                 </button>
             )
-        case "pagination":
+        default:
             return (
                 <button
                     onClick={onClick}

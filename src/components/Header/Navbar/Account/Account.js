@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import classes from "../Navbar.module.css";
 import Button from "../../../UI/Button/Button";
 
 const Account = () => {
 
-    const onLoginClick = (event) => {
-        event.preventDefault();
-    }
+    const onLoginClick = useCallback(
+        (event) => {
+            event.preventDefault();
+        },
+        [],
+    );
 
     return (
         <div className={classes.account}>

@@ -7,23 +7,23 @@ export const API_POPULAR = `${BASE_URL}/discover/movie?sort_by=popularity.desc&$
 export const API_NEW_RELEASES = `${BASE_URL}/movie/upcoming?${API_KEY}${API_LANG}`;
 export const API_NEW_TV = `${BASE_URL}/tv/popular?${API_KEY}${API_LANG}`;
 
-export const transformMovie = (movie) => {
-    return {
-        id: movie.id,
-        title: movie.title,
-        description: movie.overview,
-        rating: movie.vote_average,
-    };
-};
-
-const getMovies = async (url) => {
-    let res = await fetch(url)
-        .then((res) => res.json())
-        .then((data) => data.results);
-    return await res;
-};
-
-export const getPopular = async () => {
-    const res = await getMovies(API_POPULAR);
-    return res.map(transformMovie);
-};
+// export const transformMovie = (movie) => {
+//     return {
+//         id: movie.id,
+//         title: movie.title,
+//         description: movie.overview,
+//         rating: movie.vote_average,
+//     };
+// };
+//
+// const getMovies = async (url) => {
+//     let res = await fetch(url)
+//         .then((res) => res.json())
+//         .then((data) => data.results);
+//     return await res;
+// };
+//
+// export const getPopular = async () => {
+//     const res = await getMovies(API_POPULAR);
+//     return res.map(transformMovie);
+// };

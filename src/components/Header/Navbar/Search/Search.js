@@ -13,7 +13,7 @@ const Search = () => {
         if (inputValue) {
             navigate(`/search/${inputValue}`);
         }
-    }
+    };
 
     function showSearch(event) {
         event.preventDefault();
@@ -37,9 +37,9 @@ const Search = () => {
                 onChange={event => setInputValue(event.target.value)}
                 ref={inputRef}
             />
-            <a className={classes.button} onClick={event => showSearch(event)}>
+            <button type="button" className={classes.button} onClick={event => showSearch(event)}>
                 <img className={classes.icon} src={searchIcon} alt="search"/>
-            </a>
+            </button>
 
         </form>
     );

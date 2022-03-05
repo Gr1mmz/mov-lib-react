@@ -27,6 +27,8 @@ const MovieItem = ({type, link, id, title, name, vote_average, poster_path, back
                     <h4 className={classes.rating}>&#9733; {vote_average}</h4>
                 </Link>
             );
+        default:
+            return false;
     }
 };
 

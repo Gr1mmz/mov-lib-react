@@ -21,7 +21,8 @@ const Movie = () => {
         id = location.pathname.slice(4);
     } else {
         id = location.pathname.slice(7);
-    }
+    };
+
     const [movie, setMovie] = useState({
         genres: [],
         production_companies: [],
@@ -33,29 +34,24 @@ const Movie = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
-            return await fetch(`${BASE_URL}/${link}/${id}?${API_KEY}${API_LANG}`)
+        function fetchData() {
+            return fetch(`${BASE_URL}/${link}/${id}?${API_KEY}${API_LANG}`)
                 .then(res => res.json())
                 .then(data => setMovie(data))
                 .then(() => setLoading(false));
         }
-        async function fetchTrailers() {
-            return await fetch(`${BASE_URL}/${link}/${id}/videos?${API_KEY}${API_LANG}`)
+        function fetchTrailers() {
+            return fetch(`${BASE_URL}/${link}/${id}/videos?${API_KEY}${API_LANG}`)
                 .then(res => res.json())
                 .then(videoData => setTrailers(videoData.results));
             }
         fetchData();
         fetchTrailers();
         window.scrollTo(0, 0);
-    }, []);
+    }, [id, link]);
 
-    const backdrop = movie.backdrop_path
-        ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-        : backdropImg;
-
-    const poster = movie.poster_path
-        ? `${IMG_URL}${movie.poster_path}`
-        : posterImg;
+    const backdrop = movie.backdrop_path ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : backdropImg;
+    const poster = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : posterImg;
 
     const genresElements = movie.genres.map(genre => {
         return (
@@ -65,13 +61,12 @@ const Movie = () => {
         )
     });
 
-    const companiesElements = movie.production_companies.map(company => {
-        return (
+    const companiesElements = movie.production_companies.map(company => (
             <div className={classes.company} key={company.id}>
                 <div>{company.name}</div>
             </div>
         )
-    });
+    );
 
     const trailersElements = trailers.length
         ? trailers.map(trailer => {
@@ -88,19 +83,12 @@ const Movie = () => {
                     </iframe>
                 )
             }
-        }) : <div>Трейлеров пока нет</div>
+        })
+        : <div>Трейлеров пока нет</div>;
 
-    const budget = movie.budget
-        ? `$${movie.budget}`
-        : `неизвестно`;
-
-    const overview = movie.overview
-        ? movie.overview
-        : `Описания пока нет`;
-
-    const releaseDate = movie.release_date
-        ? movie.release_date
-        : `нет данных`
+    const budget = movie.budget ? `$${movie.budget}` : "неизвестно";
+    const overview = movie.overview ? movie.overview : "Описания пока нет";
+    const releaseDate = movie.release_date ? movie.release_date : "нет данных";
 
     return (
         <>

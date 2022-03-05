@@ -12,8 +12,8 @@ const SearchResults = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
-            return await fetch(`${API_SEARCH}&query=${searchQuery}`)
+        function fetchData() {
+            return fetch(`${API_SEARCH}&query=${searchQuery}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
                 .then(() => setLoading(false));
@@ -22,11 +22,10 @@ const SearchResults = () => {
         window.scrollTo(0, 0);
     }, [searchQuery]);
 
-    const moviesElements = movies.map(movie => {
-        return (
+    const moviesElements = movies.map(movie => (
             <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
         )
-    });
+    );
 
     return (
         <div className="container">

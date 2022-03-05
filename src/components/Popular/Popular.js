@@ -13,8 +13,8 @@ const Popular = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
-            return await fetch(`${API_POPULAR}&page=${page}`)
+        function fetchData() {
+            return fetch(`${API_POPULAR}&page=${page}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
                 .then(() => setLoading(false));
@@ -30,14 +30,13 @@ const Popular = () => {
         if (page !== 1) {
             setLoading(true);
             window.scrollTo(0, 0);
-        }
+        };
     };
 
-    const moviesElements = movies.map(movie => {
-        return (
+    const moviesElements = movies.map(movie =>  (
             <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
         )
-    });
+    );
 
     return (
         <div className="container">

@@ -7,13 +7,13 @@ const Pagination = ({page, prevPage, nextPage}) => {
     return (
         <div className={classes.pagination}>
             <Link to={`${page !== 1 ? page - 1 : page}`}>
-                <Button type="pagination" onClick={() => prevPage()}>
+                <Button onClick={() => prevPage()}>
                     &lt; Назад
                 </Button>
             </Link>
             {page}
             <Link to={`${page + 1}`}>
-                <Button type="pagination" onClick={() => nextPage()}>
+                <Button onClick={() => nextPage()}>
                     Вперед &gt;
                 </Button>
             </Link>
