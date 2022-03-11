@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 const MovieItem = ({type, link, id, title, name, vote_average, poster_path, backdrop_path}) => {
 
     const poster = poster_path ? `${IMG_URL}${poster_path}` : posterImg;
-    const backdrop = backdrop_path ? `${IMG_URL}${backdrop_path}` : backdropImg;
+    const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/original${backdrop_path}` : backdropImg;
 
     switch (type) {
         case "poster":
