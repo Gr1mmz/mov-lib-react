@@ -44,7 +44,7 @@ const Popular = () => {
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
-            <Pagination page={page} nextPage={nextPage} prevPage={prevPage} />
+            <Pagination page={page} nextPage={nextPage} prevPage={prevPage} setUrl="true" />
         </div>
     );
 };

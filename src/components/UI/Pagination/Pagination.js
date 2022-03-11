@@ -1,24 +1,38 @@
 import React from 'react';
 import classes from "./Pagination.module.css";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Button from "../Button/Button";
 
-const Pagination = ({page, prevPage, nextPage}) => {
-    return (
-        <div className={classes.pagination}>
-            <Link to={`${page !== 1 ? page - 1 : page}`}>
+const Pagination = ({page, prevPage, nextPage, setUrl}) => {
+    if (setUrl) {
+        return (
+            <div className={classes.pagination}>
+                <NavLink to={`${page !== 1 ? page - 1 : page}`} className={classes.link}>
+                    <Button onClick={() => prevPage()}>
+                        &lt; Назад
+                    </Button>
+                </NavLink>
+                {page}
+                <NavLink to={`${page + 1}`} className={classes.link}>
+                    <Button onClick={() => nextPage()}>
+                        Вперед &gt;
+                    </Button>
+                </NavLink>
+            </div>
+        );
+    } else {
+        return (
+            <div className={classes.pagination}>
                 <Button onClick={() => prevPage()}>
                     &lt; Назад
                 </Button>
-            </Link>
-            {page}
-            <Link to={`${page + 1}`}>
+                {page}
                 <Button onClick={() => nextPage()}>
                     Вперед &gt;
                 </Button>
-            </Link>
-        </div>
-    );
+            </div>
+        );
+    }
 };
 
 export default Pagination;

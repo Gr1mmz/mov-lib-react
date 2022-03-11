@@ -6,6 +6,8 @@ export const API_SEARCH = `${BASE_URL}/search/movie?${API_KEY}${API_LANG}`;
 export const API_POPULAR = `${BASE_URL}/discover/movie?sort_by=popularity.desc&${API_KEY}${API_LANG}`;
 export const API_NEW_RELEASES = `${BASE_URL}/movie/upcoming?${API_KEY}${API_LANG}`;
 export const API_NEW_TV = `${BASE_URL}/tv/popular?${API_KEY}${API_LANG}`;
+export const API_GENRES = `${BASE_URL}/genre/movie/list?${API_KEY}${API_LANG}`;
+export const API_SEARCH_BY_GENRE = `${BASE_URL}/discover/movie?${API_KEY}&sort_by=popularity.desc`;
 
 // export const transformMovie = (movie) => {
 //     return {

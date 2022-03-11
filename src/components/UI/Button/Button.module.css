@@ -34,3 +34,12 @@
     transform: translateY(0px);
     box-shadow: 0px 0px 0px 0px var(--accent-color);
 }
+
+.genre {
+    color: #000;
+    background-color: var(--header-links-color);
+}
+
+.genre:hover {
+    background-color: var(--header-links-hover);
+}
