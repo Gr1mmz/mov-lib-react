@@ -21,7 +21,7 @@ function App() {
                         <Route path="/popular/*" element={<Popular />} />
                         <Route path="/genres/*" element={<Genres/>} />
                         <Route path="/library" element={<Library/>} />
-                        <Route path="/search/*" element={<SearchResults/>} />
+                        <Route path="/search/*" element={<SearchResults />} />
                         <Route path="/movie/*" element={<Movie/>} />
                         <Route path="/tv/*" element={<Movie/>} />
                     </Routes>

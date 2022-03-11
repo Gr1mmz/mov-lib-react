@@ -8,10 +8,11 @@ const Search = () => {
     const [inputValue, setInputValue] = useState("");
     const inputRef = useRef(null);
     const navigate = useNavigate();
+
     const handlerOnSubmit = (event) => {
         event.preventDefault();
         if (inputValue) {
-            navigate(`/search/${inputValue}`);
+            navigate(`/search/${inputValue}`, {replace: true});
         }
     };
 
