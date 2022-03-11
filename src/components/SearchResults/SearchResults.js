@@ -42,10 +42,14 @@ const SearchResults = () => {
         };
     }
 
-    const moviesElements = movies.map(movie => (
-            <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
-        )
-    );
+    const nothingWasFounded =
+        <p style={{fontSize: "24px", marginTop: "20px"}}>
+            {`По запросу "${searchQuery}" ничего не найдено :(`}
+        </p>;
+
+    const moviesElements = movies.length
+    ? movies.map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="movie"/>))
+    : nothingWasFounded;
 
     return (
         <div className="container">
