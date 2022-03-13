@@ -83,14 +83,7 @@ span {
 }
 
 .genre {
-    background-color: var(--header-links-color);
-    padding: 5px 12px;
-    border-radius: 35px;
-    cursor: pointer;
-}
-
-.genre:hover {
-    color: var(--header-links-hover);
+    text-decoration: none;
 }
 
 .rating {

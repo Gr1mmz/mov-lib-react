@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./Movie.module.css";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {API_KEY, API_LANG, BASE_URL, IMG_URL} from "../../API/API";
 import Spinner from "../UI/Spinner/Spinner";
 import backdropImg from "../../images/bg-main.jpg";
 import posterImg from "../../images/poster.png";
+import Button from "../UI/Button/Button";
 
 const Movie = () => {
     const location = useLocation();
@@ -53,13 +54,14 @@ const Movie = () => {
     const backdrop = movie.backdrop_path ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : backdropImg;
     const poster = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : posterImg;
 
-    const genresElements = movie.genres.map(genre => {
-        return (
-            <div className={classes.genre} key={genre.id}>
-                <div>{genre.name}</div>
-            </div>
+    const genresElements = movie.genres.map(genre => (
+         <Link to={`/genres/${genre.id}`} key={genre.id} className={classes.genre}>
+             <Button type="genre" id={genre.id}>
+                 {genre.name}
+             </Button>
+         </Link>
         )
-    });
+    );
 
     const companiesElements = movie.production_companies.map(company => (
             <div className={classes.company} key={company.id}>
