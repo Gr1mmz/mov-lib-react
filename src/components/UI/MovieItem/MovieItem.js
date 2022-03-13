@@ -9,6 +9,7 @@ const MovieItem = ({type, link, id, title, name, vote_average, poster_path, back
 
     const poster = poster_path ? `${IMG_URL}${poster_path}` : posterImg;
     const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/original${backdrop_path}` : backdropImg;
+    const rating = vote_average ? <h4 className={classes.rating}>&#9733; {vote_average}</h4> : null;
 
     switch (type) {
         case "poster":
@@ -16,7 +17,7 @@ const MovieItem = ({type, link, id, title, name, vote_average, poster_path, back
                 <Link to={`/${link}/${id}`} className={classes.movie}>
                     <img src={poster} alt={title}/>
                     <h4 className={classes.header}>{title}</h4>
-                    <h4 className={classes.rating}>&#9733; {vote_average}</h4>
+                    {rating}
                 </Link>
             );
         case "backdrop":
@@ -24,7 +25,7 @@ const MovieItem = ({type, link, id, title, name, vote_average, poster_path, back
                 <Link to={`/${link}/${id}`} className={`${classes.movie} ${classes.backdrop}`}>
                     <img src={backdrop} alt={title || name}/>
                     <h4 className={classes.header}>{title || name}</h4>
-                    <h4 className={classes.rating}>&#9733; {vote_average}</h4>
+                    {rating}
                 </Link>
             );
         default:
