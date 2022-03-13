@@ -44,7 +44,7 @@ const SearchResults = () => {
 
     const nothingWasFounded =
         <p style={{fontSize: "24px", marginTop: "20px"}}>
-            {`По запросу "${searchQuery}" ничего не найдено :(`}
+            {`По запросу "${decodeURI(searchQuery)}" ничего не найдено :(`}
         </p>;
 
     const moviesElements = movies.length
