@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {API_GENRES, API_SEARCH_BY_GENRE, API_LANG} from "../../API/API";
+import {API_MOVIE_GENRES, API_SEARCH_BY_GENRE, API_LANG} from "../../API/API";
 import classes from "./Genres.module.css";
 import Button from "../UI/Button/Button";
 import MovieItem from "../UI/MovieItem/MovieItem";
@@ -16,8 +16,8 @@ const Genres = () => {
     const genreId = location.pathname.slice(8);
 
     useEffect(() => {
-        function fetchGenres() {
-            return fetch(API_GENRES)
+        function fetchMovieGenres() {
+            return fetch(API_MOVIE_GENRES)
                 .then(res => res.json())
                 .then(data => setGenres(data.genres));
         };
@@ -27,7 +27,7 @@ const Genres = () => {
                 .then(data => setMovies(data.results))
                 .then(() => setLoading(false));
         };
-        fetchGenres();
+        fetchMovieGenres();
         if (genreId) {
             fetchMovies();
         }
@@ -55,6 +55,7 @@ const Genres = () => {
             </Button>
         </NavLink>
     ));
+
 
     const moviesElements = movies.map(movie => (
         <MovieItem type="poster" {...movie} key={movie.id} link="movie" />

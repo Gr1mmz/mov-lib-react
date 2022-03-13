@@ -6,6 +6,7 @@ import Spinner from "../UI/Spinner/Spinner";
 import backdropImg from "../../images/bg-main.jpg";
 import posterImg from "../../images/poster.png";
 import Button from "../UI/Button/Button";
+import MovieItem from "../UI/MovieItem/MovieItem";
 
 const Movie = () => {
     const location = useLocation();
@@ -32,6 +33,8 @@ const Movie = () => {
         overview: "",
     });
     const [trailers, setTrailers] = useState([]);
+    const [similarMovies, setSimilarMovies] = useState([]);
+    const [similarTv, setSimilarTv] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -46,8 +49,20 @@ const Movie = () => {
                 .then(res => res.json())
                 .then(videoData => setTrailers(videoData.results));
             }
+        function fetchSimilarMovies() {
+            return fetch(`${BASE_URL}/${link}/${id}/similar?${API_KEY}${API_LANG}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (link === "movie") {
+                        setSimilarMovies(data.results);
+                    } else {
+                        setSimilarTv(data.results);
+                    };
+                });
+        }
         fetchData();
         fetchTrailers();
+        fetchSimilarMovies();
         window.scrollTo(0, 0);
     }, [id, link]);
 
@@ -91,6 +106,10 @@ const Movie = () => {
     const budget = movie.budget ? `$${movie.budget}` : "неизвестно";
     const overview = movie.overview ? movie.overview : "Описания пока нет";
     const releaseDate = movie.release_date ? movie.release_date : "нет данных";
+
+    const similarElements = link === "movie"
+    ? similarMovies.slice(0, 4).map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="movie"/>))
+        : similarTv.slice(0, 4).map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="tv"/>));
 
     return (
         <>
@@ -136,6 +155,10 @@ const Movie = () => {
                                     {companiesElements}
                                 </div>
                                 <div><b>Бюджет: </b>{budget}</div>
+                            </div>
+                            <div className={classes.similar}>
+                                <span>Похожие фильмы:</span>
+                                <div>{similarElements}</div>
                             </div>
                         </div>
                     </div>

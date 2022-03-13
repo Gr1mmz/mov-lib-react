@@ -45,7 +45,8 @@ span {
     display: grid;
     grid-template-areas:
         "poster description"
-        "info description";
+        "info description"
+        "similar similar";
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 560px auto;
     gap: 20px;
@@ -118,4 +119,15 @@ b {
     display: flex;
     width: 100%;
     flex-direction: column;
+}
+
+.similar {
+    grid-area: similar;
+}
+
+.similar div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }

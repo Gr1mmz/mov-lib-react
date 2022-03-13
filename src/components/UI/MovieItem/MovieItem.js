@@ -9,14 +9,14 @@ const MovieItem = ({type, link, id, title, name, vote_average, poster_path, back
 
     const poster = poster_path ? `${IMG_URL}${poster_path}` : posterImg;
     const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/original${backdrop_path}` : backdropImg;
-    const rating = vote_average ? <h4 className={classes.rating}>&#9733; {vote_average}</h4> : null;
+    const rating = vote_average ? <h4 className={classes.rating}>&#9733; {vote_average.toFixed(1)}</h4> : null;
 
     switch (type) {
         case "poster":
             return (
                 <Link to={`/${link}/${id}`} className={classes.movie}>
-                    <img src={poster} alt={title}/>
-                    <h4 className={classes.header}>{title}</h4>
+                    <img src={poster} alt={title || name}/>
+                    <h4 className={classes.header}>{title || name}</h4>
                     {rating}
                 </Link>
             );

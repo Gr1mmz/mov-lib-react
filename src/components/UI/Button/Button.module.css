@@ -38,6 +38,7 @@
 .genre {
     color: #000;
     background-color: var(--header-links-color);
+    text-transform: capitalize;
 }
 
 .genre:hover {
