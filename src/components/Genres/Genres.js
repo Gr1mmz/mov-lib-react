@@ -1,19 +1,20 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
+import {NavLink, useLocation} from "react-router-dom";
 import {API_MOVIE_GENRES, API_SEARCH_BY_GENRE, API_LANG} from "../../API/API";
-import classes from "./Genres.module.css";
 import Button from "../UI/Button/Button";
 import MovieItem from "../UI/MovieItem/MovieItem";
-import {NavLink, useLocation} from "react-router-dom";
 import Pagination from "../UI/Pagination/Pagination";
 import Spinner from "../UI/Spinner/Spinner";
 
+import classes from "./Genres.module.css";
+
 const Genres = () => {
     const location = useLocation();
+    const genreId = location.pathname.slice(8);
     const [genres, setGenres] = useState([]);
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const genreId = location.pathname.slice(8);
 
     useEffect(() => {
         function fetchMovieGenres() {
@@ -31,12 +32,9 @@ const Genres = () => {
         if (genreId) {
             fetchMovies();
         }
+        window.scrollTo(0, 0);
     }, [genreId, page]);
 
-    const onGenreClickHandler = () => {
-        setPage(1);
-        setLoading(true);
-    }
 
     const genresElements = genres.map(item => (
         <NavLink
@@ -56,22 +54,30 @@ const Genres = () => {
         </NavLink>
     ));
 
+    const onGenreClickHandler = useCallback(
+        () => {
+            setPage(1);
+            setLoading(true);
+        }, []
+    );
 
     const moviesElements = movies.map(movie => (
         <MovieItem type="poster" {...movie} key={movie.id} link="movie" />
     ));
 
-    const nextPage = () => {
-        setPage(prevState => prevState + 1);
-        window.scrollTo(0, 0);
-    };
+    const nextPage = useCallback(
+        () => {
+            setPage(prevState => prevState + 1);
+        }, []
+    );
 
-    const prevPage = () => {
-        if (page !== 1) {
-            setPage(prevState => prevState - 1);
-            window.scrollTo(0, 0);
-        };
-    }
+    const prevPage = useCallback(
+        () => {
+            if (page !== 1) {
+                setPage(prevState => prevState - 1);
+            };
+        }, [page]
+    );
 
     return (
         <>

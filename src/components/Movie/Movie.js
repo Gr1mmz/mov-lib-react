@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import classes from "./Movie.module.css";
 import {Link, useLocation} from "react-router-dom";
 import {API_KEY, API_LANG, BASE_URL, IMG_URL} from "../../API/API";
 import Spinner from "../UI/Spinner/Spinner";
-import backdropImg from "../../images/bg-main.jpg";
-import posterImg from "../../images/poster.png";
 import Button from "../UI/Button/Button";
 import MovieItem from "../UI/MovieItem/MovieItem";
+
+import classes from "./Movie.module.css";
+import backdropImg from "../../images/bg-main.jpg";
+import posterImg from "../../images/poster.png";
 
 const Movie = () => {
     const location = useLocation();
@@ -98,14 +99,59 @@ const Movie = () => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen>
                     </iframe>
-                )
-            }
+                );
+            };
         })
         : <div>Трейлеров пока нет</div>;
 
     const budget = movie.budget ? `$${movie.budget}` : "неизвестно";
     const overview = movie.overview ? movie.overview : "Описания пока нет";
-    const releaseDate = movie.release_date ? movie.release_date : "нет данных";
+
+    let releaseDate = "нет данных";
+    if (movie.release_date) {
+        let formattedDate = movie.release_date.split("-").reverse();
+        switch (formattedDate[1]) {
+            case "01":
+                formattedDate[1] = "января";
+                break;
+            case "02":
+                formattedDate[1] = "февраля";
+                break;
+            case "03":
+                formattedDate[1] = "марта";
+                break;
+            case "04":
+                formattedDate[1] = "апреля";
+                break;
+            case "05":
+                formattedDate[1] = "мая";
+                break;
+            case "06":
+                formattedDate[1] = "июня";
+                break;
+            case "07":
+                formattedDate[1] = "июля";
+                break;
+            case "08":
+                formattedDate[1] = "августа";
+                break;
+            case "09":
+                formattedDate[1] = "сентября";
+                break;
+            case "10":
+                formattedDate[1] = "октября";
+                break;
+            case "11":
+                formattedDate[1] = "ноября";
+                break;
+            case "12":
+                formattedDate[1] = "декабря";
+                break;
+            default:
+                formattedDate[1] = "";
+        };
+        releaseDate = formattedDate.join(" ");
+    };
 
     const similarElements = link === "movie"
     ? similarMovies.slice(0, 4).map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="movie"/>))

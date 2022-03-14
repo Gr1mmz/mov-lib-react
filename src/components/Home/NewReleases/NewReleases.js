@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import MovieItem from "../../UI/MovieItem/MovieItem";
-import classes from "./NewReleases.module.css";
 import Spinner from "../../UI/Spinner/Spinner";
+
+import classes from "./NewReleases.module.css";
 
 const NewReleases = ({header, url, link}) => {
     const [newMovies, setNewMovies] = useState([]);
@@ -16,11 +17,9 @@ const NewReleases = ({header, url, link}) => {
         fetchData();
     }, [url]);
 
-    const moviesElements = newMovies.map(movie => {
-        return (
-            <MovieItem type="backdrop" {...movie} key={movie.id} link={link}/>
-        )
-    }).slice(0, 10);
+    const moviesElements = newMovies.map(movie =>  (
+        <MovieItem type="backdrop" {...movie} key={movie.id} link={link}/>
+    )).slice(0, 10);
 
     return (
         <>

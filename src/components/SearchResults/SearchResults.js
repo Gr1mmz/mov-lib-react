@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {API_SEARCH} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
-import classes from "../Popular/Popular.module.css";
 import Spinner from "../UI/Spinner/Spinner";
 import Pagination from "../UI/Pagination/Pagination";
+
+import classes from "../Popular/Popular.module.css";
 
 const SearchResults = () => {
     const location = useLocation();
@@ -32,15 +33,19 @@ const SearchResults = () => {
         setPage(1);
     }, [searchQuery])
 
-    const nextPage = () => {
-        setPage(prevState => prevState + 1);
-    }
+    const nextPage = useCallback(
+        () => {
+            setPage(prevState => prevState + 1);
+        }, []
+    );
 
-    const prevPage = () => {
-        if (page !== 1) {
-            setPage(prevState => prevState - 1);
-        };
-    }
+    const prevPage = useCallback(
+        () => {
+            if (page !== 1) {
+                setPage(prevState => prevState - 1);
+            };
+        }, [page]
+    );
 
     const nothingWasFounded =
         <p style={{fontSize: "24px", marginTop: "20px"}}>

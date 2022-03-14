@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+
 import searchIcon from "./search.svg";
 import classes from "./Search.module.css";
-import {useNavigate} from "react-router-dom";
 
 const Search = () => {
     const [show, setShow] = useState(false);
@@ -12,7 +13,7 @@ const Search = () => {
     const handlerOnSubmit = (event) => {
         event.preventDefault();
         if (inputValue) {
-            navigate(`/search/${inputValue}`, {replace: true});
+            navigate(`/search/${inputValue}`);
         }
     };
 

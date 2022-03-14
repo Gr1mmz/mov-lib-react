@@ -1,9 +1,10 @@
 import React from 'react';
-import classes from "./MovieItem.module.css";
+import {Link} from "react-router-dom";
 import {IMG_URL} from "../../../API/API";
+
+import classes from "./MovieItem.module.css";
 import posterImg from "../../../images/poster.png";
 import backdropImg from "../../../images/backdrop.jpg";
-import {Link} from "react-router-dom";
 
 const MovieItem = ({type, link, id, title, name, vote_average, poster_path, backdrop_path}) => {
 

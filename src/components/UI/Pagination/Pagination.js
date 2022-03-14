@@ -1,7 +1,8 @@
 import React from 'react';
-import classes from "./Pagination.module.css";
 import {NavLink} from "react-router-dom";
 import Button from "../Button/Button";
+
+import classes from "./Pagination.module.css";
 
 const Pagination = ({page, prevPage, nextPage, setUrl}) => {
     if (setUrl) {

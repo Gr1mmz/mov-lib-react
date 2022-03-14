@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {API_POPULAR} from "../../API/API";
-import classes from "./Popular.module.css";
+import React, {useCallback, useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
+import {API_POPULAR_MOVIES} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
 import Spinner from "../UI/Spinner/Spinner";
-import {useLocation} from "react-router-dom";
 import Pagination from "../UI/Pagination/Pagination";
+
+import classes from "./Popular.module.css";
 
 const Popular = () => {
     const location = useLocation();
@@ -14,24 +15,28 @@ const Popular = () => {
 
     useEffect(() => {
         function fetchData() {
-            return fetch(`${API_POPULAR}&page=${page}`)
+            return fetch(`${API_POPULAR_MOVIES}&page=${page}`)
                 .then(res => res.json())
                 .then(data => setMovies(data.results))
                 .then(() => setLoading(false));
         };
         fetchData();
+        window.scrollTo(0, 0);
     }, [page]);
 
-    const nextPage = () => {
-        setLoading(true);
-        window.scrollTo(0, 0);
-    };
-    const prevPage = () => {
-        if (page !== 1) {
+    const nextPage = useCallback(
+        () => {
             setLoading(true);
-            window.scrollTo(0, 0);
-        };
-    };
+        }, []
+    );
+
+    const prevPage = useCallback(
+        () => {
+            if (page !== 1) {
+                setLoading(true);
+            };
+        }, [page]
+    );
 
     const moviesElements = movies.map(movie =>  (
             <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>

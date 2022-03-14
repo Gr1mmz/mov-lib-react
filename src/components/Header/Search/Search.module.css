@@ -1,4 +1,4 @@
-@import url("../../../../styles/variables.css");
+@import url("../../../styles/variables.css");
 
 .search {
     position: relative;
@@ -21,6 +21,9 @@
     color: var(--header-links-color);
     font-size: 16px;
     font-family: inherit;
+}
+
+.input:focus {
     outline: none;
 }
 
@@ -50,6 +53,9 @@
     border: none;
     background-color: var(--input-bg-color);
     cursor: pointer;
+}
+
+.button:focus {
     outline: none;
 }
 

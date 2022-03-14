@@ -1,6 +1,6 @@
-import './styles/App.css';
-import Header from "./components/Header/Header";
+import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Main from "./components/Main/Main";
 import Popular from "./components/Popular/Popular";
@@ -9,6 +9,8 @@ import Library from "./components/Library/Library";
 import Footer from "./components/Footer/Footer";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Movie from "./components/Movie/Movie";
+
+import './styles/App.css';
 
 function App() {
     return (
