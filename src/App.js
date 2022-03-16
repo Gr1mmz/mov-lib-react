@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -9,14 +9,18 @@ import Library from "./components/Library/Library";
 import Footer from "./components/Footer/Footer";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Movie from "./components/Movie/Movie";
+import Modal from "./components/UI/Modal/Modal";
 
 import './styles/App.css';
 
 function App() {
+
+    const [modal, setModal] = useState(false);
+
     return (
         <BrowserRouter>
             <div className="App">
-                <Header/>
+                <Header setModal={setModal}/>
                 <Main>
                     <Routes>
                         <Route path="/" element={<Home/>} />
@@ -29,6 +33,7 @@ function App() {
                     </Routes>
                 </Main>
                 <Footer/>
+                <Modal type="login" visible={modal} setVisible={setModal}/>
             </div>
         </BrowserRouter>
     );

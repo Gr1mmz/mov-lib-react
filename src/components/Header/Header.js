@@ -5,7 +5,7 @@ import Account from "./Account/Account";
 
 import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = ({setModal}) => {
 
     const links = [
         {
@@ -49,7 +49,7 @@ const Header = () => {
                         })}
                     </div>
                     <Search/>
-                    <Account/>
+                    <Account setModal={setModal}/>
                 </nav>
             </div>
         </header>

@@ -3,12 +3,13 @@ import Button from "../../UI/Button/Button";
 
 import classes from "../Header.module.css";
 
-const Account = () => {
+const Account = ({setModal}) => {
 
     const onLoginClick = useCallback(
         (event) => {
             event.preventDefault();
-        }, []
+            setModal(true);
+        }, [setModal]
     );
 
     return (
