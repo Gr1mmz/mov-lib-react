@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
 import {API_MOVIE_GENRES, API_SEARCH_BY_GENRE, API_LANG} from "../../API/API";
 import Button from "../UI/Button/Button";
@@ -35,24 +35,25 @@ const Genres = () => {
         window.scrollTo(0, 0);
     }, [genreId, page]);
 
-
-    const genresElements = genres.map(item => (
-        <NavLink
-            to={`${item.id}`}
-            key={item.id}
-            className={({ isActive }) => isActive
-                ? `${classes.genre} ${classes.active}`
-                : `${classes.genre}`}
-        >
-            <Button
-                type="genre"
-                id={item.id}
-                onClick={() => onGenreClickHandler()}
+    const genresElements = useMemo(() => {
+        return genres.map(item => (
+            <NavLink
+                to={`${item.id}`}
+                key={item.id}
+                className={({ isActive }) => isActive
+                    ? `${classes.genre} ${classes.active}`
+                    : `${classes.genre}`}
             >
-                {item.name}
-            </Button>
-        </NavLink>
-    ));
+                <Button
+                    type="genre"
+                    id={item.id}
+                    onClick={() => onGenreClickHandler()}
+                >
+                    {item.name}
+                </Button>
+            </NavLink>
+        ));
+    }, [genres]);
 
     const onGenreClickHandler = useCallback(
         () => {
