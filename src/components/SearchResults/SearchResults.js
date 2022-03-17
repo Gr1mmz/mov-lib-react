@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {API_SEARCH} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
@@ -33,20 +33,6 @@ const SearchResults = () => {
         setPage(1);
     }, [searchQuery])
 
-    const nextPage = useCallback(
-        () => {
-            setPage(prevState => prevState + 1);
-        }, []
-    );
-
-    const prevPage = useCallback(
-        () => {
-            if (page !== 1) {
-                setPage(prevState => prevState - 1);
-            };
-        }, [page]
-    );
-
     const nothingWasFounded =
         <p style={{fontSize: "24px", marginTop: "20px"}}>
             {`По запросу "${decodeURI(searchQuery)}" ничего не найдено :(`}
@@ -63,7 +49,14 @@ const SearchResults = () => {
                 {loading ? <Spinner/> : moviesElements}
             </div>
             <>
-                {totalPages > 1 ? <Pagination page={page} nextPage={nextPage} prevPage={prevPage} /> : null}
+                {totalPages > 1
+                    ? <Pagination
+                        page={page}
+                        setPage={setPage}
+                        setLoading={setLoading}
+                        totalPages={totalPages} />
+                    : null
+                }
             </>
         </div>
     );

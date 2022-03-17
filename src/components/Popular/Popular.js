@@ -1,5 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 import {API_POPULAR_MOVIES} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
 import Spinner from "../UI/Spinner/Spinner";
@@ -8,8 +7,8 @@ import Pagination from "../UI/Pagination/Pagination";
 import classes from "./Popular.module.css";
 
 const Popular = () => {
-    const location = useLocation();
-    const page = location.pathname.slice(9) ? parseInt(location.pathname.slice(9)) : 1;
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -17,26 +16,16 @@ const Popular = () => {
         function fetchData() {
             return fetch(`${API_POPULAR_MOVIES}&page=${page}`)
                 .then(res => res.json())
-                .then(data => setMovies(data.results))
+                .then(data => {
+                    setTotalPages(data.total_pages);
+                    setMovies(data.results);
+                })
                 .then(() => setLoading(false));
         };
         fetchData();
         window.scrollTo(0, 0);
     }, [page]);
 
-    const nextPage = useCallback(
-        () => {
-            setLoading(true);
-        }, []
-    );
-
-    const prevPage = useCallback(
-        () => {
-            if (page !== 1) {
-                setLoading(true);
-            };
-        }, [page]
-    );
 
     const moviesElements = movies.map(movie =>  (
             <MovieItem type="poster" {...movie} key={movie.id} link="movie"/>
@@ -49,7 +38,7 @@ const Popular = () => {
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
-            <Pagination page={page} nextPage={nextPage} prevPage={prevPage} setUrl="true" />
+            <Pagination page={page} setPage={setPage} setLoading={setLoading} totalPages={totalPages} />
         </div>
     );
 };

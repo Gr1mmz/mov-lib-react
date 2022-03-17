@@ -14,6 +14,7 @@ const Genres = () => {
     const [genres, setGenres] = useState([]);
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -25,7 +26,10 @@ const Genres = () => {
         function fetchMovies() {
             return fetch(`${API_SEARCH_BY_GENRE}&with_genres=${genreId}&page=${page}${API_LANG}`)
                 .then(res => res.json())
-                .then(data => setMovies(data.results))
+                .then(data => {
+                    setTotalPages(data.total_pages);
+                    setMovies(data.results);
+                })
                 .then(() => setLoading(false));
         };
         fetchMovieGenres();
@@ -34,6 +38,13 @@ const Genres = () => {
         }
         window.scrollTo(0, 0);
     }, [genreId, page]);
+
+    const onGenreClickHandler = useCallback(
+        () => {
+            setPage(1);
+            setLoading(true);
+        }, []
+    );
 
     const genresElements = useMemo(() => {
         return genres.map(item => (
@@ -55,30 +66,9 @@ const Genres = () => {
         ));
     }, [genres]);
 
-    const onGenreClickHandler = useCallback(
-        () => {
-            setPage(1);
-            setLoading(true);
-        }, []
-    );
-
     const moviesElements = movies.map(movie => (
         <MovieItem type="poster" {...movie} key={movie.id} link="movie" />
     ));
-
-    const nextPage = useCallback(
-        () => {
-            setPage(prevState => prevState + 1);
-        }, []
-    );
-
-    const prevPage = useCallback(
-        () => {
-            if (page !== 1) {
-                setPage(prevState => prevState - 1);
-            };
-        }, [page]
-    );
 
     return (
         <>
@@ -86,7 +76,14 @@ const Genres = () => {
             <div className={classes.genres}>{genresElements}</div>
             <div className={classes.movies}>{loading ? <Spinner/> : moviesElements}</div>
             <>
-                {movies.length ? <Pagination page={page} nextPage={nextPage} prevPage={prevPage} /> : null}
+                {movies.length
+                    ? <Pagination
+                        page={page}
+                        setPage={setPage}
+                        setLoading={setLoading}
+                        totalPages={totalPages} />
+                    : null
+                }
             </>
         </>
     );
