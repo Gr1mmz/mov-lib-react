@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {API_POPULAR_MOVIES} from "../../API/API";
+import {API_POPULAR_MOVIES, getMovies} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
 import Spinner from "../UI/Spinner/Spinner";
 import Pagination from "../UI/Pagination/Pagination";
@@ -13,17 +13,13 @@ const Popular = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        function fetchData() {
-            return fetch(`${API_POPULAR_MOVIES}&page=${page}`)
-                .then(res => res.json())
-                .then(data => {
-                    setTotalPages(data.total_pages);
-                    setMovies(data.results);
-                })
-                .then(() => setLoading(false));
-        };
-        fetchData();
+        getMovies(API_POPULAR_MOVIES, page, setLoading, setMovies, setTotalPages);
         window.scrollTo(0, 0);
+        return () => {
+            setMovies([]);
+            setTotalPages(1);
+            setLoading(true);
+        }
     }, [page]);
 
 

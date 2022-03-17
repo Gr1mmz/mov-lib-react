@@ -3,21 +3,16 @@ import MovieItem from "../../UI/MovieItem/MovieItem";
 import Spinner from "../../UI/Spinner/Spinner";
 
 import classes from "./NewReleases.module.css";
+import {getMovies} from "../../../API/API";
 
 const NewReleases = ({header, url, link}) => {
-    const [newMovies, setNewMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        function fetchData() {
-            return fetch(`${url}`)
-                .then(res => res.json())
-                .then(data => setNewMovies(data.results))
-                .then(() => setLoading(false));
-        };
-        fetchData();
+        getMovies(url, 1, setLoading, setMovies);
     }, [url]);
 
-    const moviesElements = newMovies.map(movie =>  (
+    const moviesElements = movies.map(movie =>  (
         <MovieItem type="backdrop" {...movie} key={movie.id} link={link}/>
     )).slice(0, 10);
 

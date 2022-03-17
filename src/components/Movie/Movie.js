@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useLocation} from "react-router-dom";
-import {API_KEY, API_LANG, BASE_URL, IMG_URL} from "../../API/API";
+import {IMG_URL, getMovieInfo} from "../../API/API";
 import Spinner from "../UI/Spinner/Spinner";
 import Button from "../UI/Button/Button";
 import MovieItem from "../UI/MovieItem/MovieItem";
@@ -12,18 +12,14 @@ import posterImg from "../../images/poster.png";
 const Movie = () => {
     const location = useLocation();
 
-    let link = "";
+    let link = "movie";
     if (location.pathname.indexOf("tv") !== -1) {
         link = "tv";
-    } else {
-        link = "movie";
     };
 
-    let id = 0;
+    let id = location.pathname.slice(7);
     if (link === "tv") {
         id = location.pathname.slice(4);
-    } else {
-        id = location.pathname.slice(7);
     };
 
     const [movie, setMovie] = useState({
@@ -35,35 +31,10 @@ const Movie = () => {
     });
     const [trailers, setTrailers] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
-    const [similarTv, setSimilarTv] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        function fetchData() {
-            return fetch(`${BASE_URL}/${link}/${id}?${API_KEY}${API_LANG}`)
-                .then(res => res.json())
-                .then(data => setMovie(data))
-                .then(() => setLoading(false));
-        }
-        function fetchTrailers() {
-            return fetch(`${BASE_URL}/${link}/${id}/videos?${API_KEY}${API_LANG}`)
-                .then(res => res.json())
-                .then(videoData => setTrailers(videoData.results));
-            }
-        function fetchSimilarMovies() {
-            return fetch(`${BASE_URL}/${link}/${id}/similar?${API_KEY}${API_LANG}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (link === "movie") {
-                        setSimilarMovies(data.results);
-                    } else {
-                        setSimilarTv(data.results);
-                    };
-                });
-        }
-        fetchData();
-        fetchTrailers();
-        fetchSimilarMovies();
+        getMovieInfo(link, id, setMovie, setLoading, setTrailers, setSimilarMovies);
         window.scrollTo(0, 0);
     }, [id, link]);
 
@@ -153,9 +124,9 @@ const Movie = () => {
         releaseDate = formattedDate.join(" ");
     };
 
-    const similarElements = link === "movie"
-    ? similarMovies.slice(0, 4).map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="movie"/>))
-        : similarTv.slice(0, 4).map(movie => (<MovieItem type="poster" {...movie} key={movie.id} link="tv"/>));
+    const similarElements = similarMovies.slice(0, 4).map(movie => (
+        <MovieItem type="poster" {...movie} key={movie.id} link={link}/>
+    ));
 
     return (
         <>

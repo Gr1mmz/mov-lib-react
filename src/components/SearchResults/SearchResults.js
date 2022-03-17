@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
-import {API_SEARCH} from "../../API/API";
+import {API_SEARCH_QUERY, getMovies} from "../../API/API";
 import MovieItem from "../UI/MovieItem/MovieItem";
 import Spinner from "../UI/Spinner/Spinner";
 import Pagination from "../UI/Pagination/Pagination";
@@ -16,16 +16,7 @@ const SearchResults = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        function fetchData() {
-            return fetch(`${API_SEARCH}&query=${searchQuery}&page=${page}`)
-                .then(res => res.json())
-                .then(data => {
-                    setTotalPages(data.total_pages);
-                    setMovies(data.results);
-                })
-                .then(() => setLoading(false));
-        };
-        fetchData();
+        getMovies(`${API_SEARCH_QUERY}${searchQuery}`, page, setLoading, setMovies, setTotalPages);
         window.scrollTo(0, 0);
     }, [searchQuery, page]);
 

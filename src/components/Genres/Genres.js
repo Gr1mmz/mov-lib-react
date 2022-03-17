@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
-import {API_MOVIE_GENRES, API_SEARCH_BY_GENRE, API_LANG} from "../../API/API";
+import {API_GENRES, API_GENRE_MOVIES, getMovies, getGenres} from "../../API/API";
 import Button from "../UI/Button/Button";
 import MovieItem from "../UI/MovieItem/MovieItem";
 import Pagination from "../UI/Pagination/Pagination";
@@ -18,23 +18,9 @@ const Genres = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        function fetchMovieGenres() {
-            return fetch(API_MOVIE_GENRES)
-                .then(res => res.json())
-                .then(data => setGenres(data.genres));
-        };
-        function fetchMovies() {
-            return fetch(`${API_SEARCH_BY_GENRE}&with_genres=${genreId}&page=${page}${API_LANG}`)
-                .then(res => res.json())
-                .then(data => {
-                    setTotalPages(data.total_pages);
-                    setMovies(data.results);
-                })
-                .then(() => setLoading(false));
-        };
-        fetchMovieGenres();
+        getGenres(API_GENRES, setGenres);
         if (genreId) {
-            fetchMovies();
+            getMovies(`${API_GENRE_MOVIES}${genreId}`, page, setLoading, setMovies, setTotalPages);
         }
         window.scrollTo(0, 0);
     }, [genreId, page]);
