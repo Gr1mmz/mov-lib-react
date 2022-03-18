@@ -1,11 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import MediaQuery from "react-responsive";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
 
 import classes from "./Header.module.css";
 
-const Header = ({setModal}) => {
+const Header = ({setModal, setMobileNavbar}) => {
 
     const links = [
         {
@@ -35,18 +36,24 @@ const Header = ({setModal}) => {
             <div className="container">
                 <nav className={classes.nav}>
                     <div className={classes.links}>
-                        {links.map(link => {
-                            return (
-                                <NavLink
-                                    to={link.url}
-                                    key={link.name}
-                                    className={({ isActive }) => isActive
-                                        ? `${classes.link} ${classes.link_active}`
-                                        : `${classes.link}`}
-                                >{link.text}
-                                </NavLink>
-                            )
-                        })}
+                        <MediaQuery minWidth={992}>
+                            {links.map(link => {
+                                return (
+                                    <NavLink
+                                        to={link.url}
+                                        key={link.name}
+                                        className={({isActive}) => isActive
+                                            ? `${classes.link} ${classes.link_active}`
+                                            : `${classes.link}`}
+                                    >
+                                        {link.text}
+                                    </NavLink>)
+                                }
+                            )}
+                        </MediaQuery>
+                        <MediaQuery maxWidth={991}>
+                            <a className={classes.link} onClick={() => setMobileNavbar(true)}>Меню</a>
+                        </MediaQuery>
                     </div>
                     <Search/>
                     <Account setModal={setModal}/>

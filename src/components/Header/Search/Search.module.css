@@ -1,10 +1,10 @@
-@import url("../../../styles/variables.css");
-
 .search {
     position: relative;
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
+    max-width: 350px;
+    margin-left: auto;
     border-radius: 35px;
     overflow: hidden;
 }
@@ -19,7 +19,7 @@
     transition: all 0.5s ease 0s;
     padding: 0;
     color: var(--header-links-color);
-    font-size: 16px;
+    font-size: inherit;
     font-family: inherit;
 }
 
@@ -31,6 +31,7 @@
     color: var(--header-links-color);
     opacity: 0;
     transition: all 0.5s ease 0s;
+    font-size: inherit;
 }
 
 .input.active {

@@ -36,6 +36,7 @@
 }
 
 .genre {
+    padding: 0.4em 0.9em;
     color: #000;
     background-color: var(--header-links-color);
     text-transform: lowercase;

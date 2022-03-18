@@ -10,17 +10,19 @@ import Footer from "./components/Footer/Footer";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Movie from "./components/Movie/Movie";
 import Modal from "./components/UI/Modal/Modal";
+import MobileNavbar from "./components/Header/MobileNavbar/MobileNavbar";
 
 import './styles/App.css';
 
 function App() {
 
     const [modal, setModal] = useState(false);
+    const [mobileNavbar, setMobileNavbar] = useState(false);
 
     return (
         <BrowserRouter>
             <div className="App">
-                <Header setModal={setModal}/>
+                <Header setModal={setModal} setMobileNavbar={setMobileNavbar}/>
                 <Main>
                     <Routes>
                         <Route path="/" element={<Home/>} />
@@ -34,6 +36,7 @@ function App() {
                 </Main>
                 <Footer/>
                 <Modal type="login" visible={modal} setVisible={setModal}/>
+                <MobileNavbar visible={mobileNavbar} setVisible={setMobileNavbar}/>
             </div>
         </BrowserRouter>
     );

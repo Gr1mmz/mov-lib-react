@@ -29,13 +29,13 @@ const Popular = () => {
     );
 
     return (
-        <div className="container">
+        <>
             <h2>Популярные сейчас</h2>
             <div className={classes.wrapper}>
                 {loading ? <Spinner/> : moviesElements}
             </div>
             <Pagination page={page} setPage={setPage} setLoading={setLoading} totalPages={totalPages} />
-        </div>
+        </>
     );
 };
 

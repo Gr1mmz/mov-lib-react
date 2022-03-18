@@ -1,6 +1,6 @@
 .main {
     position: relative;
     min-height: calc(100vh - 89px);
-    padding: 50px 0;
+    padding: 2em 0 1em 0;
     color: #fff;
 }
