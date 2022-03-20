@@ -25,18 +25,20 @@ const Movie = () => {
     const [movie, setMovie] = useState({
         genres: [],
         production_companies: [],
-        backdrop_path: "",
-        budget: 0,
-        overview: "",
     });
     const [trailers, setTrailers] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getMovieInfo(link, id, setMovie, setLoading, setTrailers, setSimilarMovies);
+        getMovieInfo(link, id).then(data => {
+            setMovie(data.info);
+            setTrailers(data.trailers);
+            setSimilarMovies(data.similar);
+            setLoading(false);
+        });
         window.scrollTo(0, 0);
-    }, [id, link]);
+    }, [link, id]);
 
     const backdrop = movie.backdrop_path ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : backdropImg;
     const poster = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : posterImg;
