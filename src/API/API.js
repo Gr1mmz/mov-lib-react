@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const API_KEY = "617bdf73d3624d01c9238fbe9d4643b0";
-export const BASE_URL = "https://api.themoviedb.org/3";
-export const API_LANG = "ru-RU";
+const API_KEY = "617bdf73d3624d01c9238fbe9d4643b0";
+const BASE_URL = "https://api.themoviedb.org/3";
+const API_LANG = "ru-RU";
 export const IMG_URL = "https://image.tmdb.org/t/p/w500";
 export const API_POPULAR_MOVIES = `${BASE_URL}/discover/movie`;
 export const API_SEARCH_QUERY = `${BASE_URL}/search/movie?query=`;
@@ -11,51 +11,48 @@ export const API_GENRE_MOVIES = `${BASE_URL}/discover/movie?with_genres=`;
 export const API_NEW_RELEASES = `${BASE_URL}/movie/upcoming`;
 export const API_NEW_TV = `${BASE_URL}/tv/popular`;
 
-const params = {
+const defaultParams = {
     api_key: API_KEY,
     language: API_LANG,
-}
-
-export const getMovies = (url, page, setLoading, setMovies, setTotalPages = () => {}) => {
-    axios.get(url, {
-        params: {
-            api_key: API_KEY,
-            language: API_LANG,
-            page: page,
-        },
-    }).then(res => {
-        setTotalPages(res.data.total_pages);
-        setMovies(res.data.results);
-        setLoading(false);
-    });
 };
 
-export const getGenres = (url, setGenres) => {
-    axios.get(url, {params}).then(res => setGenres(res.data.genres));
+async function getData(url) {
+    const data = await axios.get(url, {params: defaultParams});
+    if (data) {
+        return data;
+    };
+};
+
+export async function getMovies(url, page) {
+    const params = defaultParams;
+    params.page = page;
+    try {
+        const movies = await getData(url, {params});
+        return movies.data;
+    } catch (e) {
+        throw new Error(e);
+    }
+};
+
+export async function getGenres(url) {
+    const genres = await getData(url);
+    return genres.data;
 };
 
 export async function getMovieInfo(link, id) {
     const url = `${BASE_URL}/${link}/${id}`;
+
     try {
-        const movieInfo = await getMovieMetaInfo(url);
-        const info = await movieInfo.data;
-        const movieTrailers = await getMovieMetaInfo(`${url}/videos`)
-        const trailers = await movieTrailers.data.results;
-        const similarMovies = await getMovieMetaInfo(`${url}/similar`)
-        const similar = await similarMovies.data.results;
+        const movieInfo = await getData(url);
+        const movieTrailers = await getData(`${url}/videos`);
+        const similarMovies = await getData(`${url}/similar`);
+
         return {
-            info: info,
-            trailers: trailers,
-            similar: similar,
+            info: movieInfo.data,
+            trailers: movieTrailers.data.results,
+            similar: similarMovies.data.results,
         };
     } catch (e) {
         throw new Error(e);
-    };
-};
-
-async function getMovieMetaInfo(url) {
-    const data = await axios.get(url, {params});
-    if (data) {
-        return data;
     };
 };

@@ -25,12 +25,18 @@ const MobileNavbar = ({visible, setVisible}) => {
             text: "Библиотека",
         }
     ];
+
+    const onClickHandler = (e) => {
+        e.stopPropagation();
+        setVisible(false);
+    }
+
     return (
         <div
             className={visible ? `${classes.mobileNavbar} ${classes.active}` : classes.mobileNavbar}
             onClick={() => setVisible(false)}
         >
-            <div className={classes.mobileNavbarLinks} onClick={event => event.stopPropagation()}>
+            <div className={classes.mobileNavbarLinks} onClick={() => onClickHandler}>
                 {links.map(link => {
                         return (
                             <NavLink

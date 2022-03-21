@@ -16,7 +16,11 @@ const SearchResults = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getMovies(`${API_SEARCH_QUERY}${searchQuery}`, page, setLoading, setMovies, setTotalPages);
+        getMovies(`${API_SEARCH_QUERY}${searchQuery}`, page)
+            .then(data => {
+                setMovies(data.results);
+                setTotalPages(data.total_pages);
+            }).then(() => setLoading(false));
         window.scrollTo(0, 0);
     }, [searchQuery, page]);
 

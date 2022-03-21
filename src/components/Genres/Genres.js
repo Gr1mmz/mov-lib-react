@@ -18,9 +18,13 @@ const Genres = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getGenres(API_GENRES, setGenres);
+        getGenres(API_GENRES).then(data => setGenres(data.genres));
         if (genreId) {
-            getMovies(`${API_GENRE_MOVIES}${genreId}`, page, setLoading, setMovies, setTotalPages);
+            getMovies(`${API_GENRE_MOVIES}${genreId}`, page)
+                .then(data => {
+                    setMovies(data.results);
+                    setTotalPages(data.total_pages);
+                }).then(() => setLoading(false));
         }
         window.scrollTo(0, 0);
     }, [genreId, page]);

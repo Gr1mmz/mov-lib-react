@@ -1,0 +1,64 @@
+.description {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+
+.title {
+    font-size: 2.5em;
+}
+
+.genres {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.genre {
+    text-decoration: none;
+}
+
+.rating {
+    color: gold;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.trailers {
+    display: flex;
+    flex-direction: column;
+}
+
+.trailers iframe {
+    height: 400px;
+    margin-top: 0.6em;
+}
+
+@media screen and (max-width: 1200px) {
+    .trailers iframe {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .trailers iframe {
+        height: 270px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 1.5em;
+    }
+    .trailers iframe {
+        height: 180px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .trailers iframe {
+        width: 100%;
+        height: auto;
+    }
+}

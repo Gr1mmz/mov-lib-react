@@ -9,7 +9,10 @@ const NewReleases = ({header, url, link}) => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        getMovies(url, 1, setLoading, setMovies);
+        getMovies(url, 1)
+            .then(data => {
+                setMovies(data.results);
+            }).then(() => setLoading(false));
     }, [url]);
 
     const moviesElements = movies.map(movie =>  (

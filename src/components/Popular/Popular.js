@@ -13,13 +13,17 @@ const Popular = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getMovies(API_POPULAR_MOVIES, page, setLoading, setMovies, setTotalPages);
+        getMovies(API_POPULAR_MOVIES, page)
+            .then(data => {
+                setMovies(data.results);
+                setTotalPages(data.total_pages);
+            }).then(() => setLoading(false));
         window.scrollTo(0, 0);
-        return () => {
-            setMovies([]);
-            setTotalPages(1);
-            setLoading(true);
-        }
+        // return () => {
+        //     setMovies([]);
+        //     setTotalPages(1);
+        //     setLoading(true);
+        // }
     }, [page]);
 
 
