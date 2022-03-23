@@ -41,6 +41,11 @@
     color: #000;
     background-color: var(--header-links-color);
     text-transform: lowercase;
+    text-decoration: none;
+}
+
+.active {
+    background-color: var(--header-links-hover);
 }
 
 .genre:hover {

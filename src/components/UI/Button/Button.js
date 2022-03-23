@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, NavLink} from "react-router-dom";
 import classes from "./Button.module.css";
 
 const Button = ({type, children, onClick, id}) => {
@@ -16,14 +17,16 @@ const Button = ({type, children, onClick, id}) => {
             )
         case "genre":
             return (
-                <button
-                    onClick={onClick}
-                    type="button"
+                <NavLink
+                    to={`/genres/${id}`}
                     id={id}
-                    className={`${classes.btn} ${classes.genre}`}
+                    onClick={onClick}
+                    className={({ isActive }) => isActive
+                        ? `${classes.btn} ${classes.genre} ${classes.active}`
+                        : `${classes.btn} ${classes.genre}`}
                 >
                     {children}
-                </button>
+                </NavLink>
             )
         default:
             return (

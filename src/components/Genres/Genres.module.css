@@ -6,14 +6,6 @@
     gap: 0.6em;
 }
 
-.genre {
-    text-decoration: none;
-}
-
-.active button {
-    background-color: var(--header-links-hover);
-}
-
 .movies {
     margin-top: 20px;
     display: flex;

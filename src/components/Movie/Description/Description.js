@@ -1,16 +1,13 @@
 import React from 'react';
 import classes from "./Description.module.css";
-import {Link} from "react-router-dom";
 import Button from "../../UI/Button/Button";
 
 const Description = ({movie, trailers}) => {
 
     const genresElements = movie.genres.map(genre => (
-            <Link to={`/genres/${genre.id}`} key={genre.id} className={classes.genre}>
-                <Button type="genre" id={genre.id}>
-                    {genre.name}
-                </Button>
-            </Link>
+            <Button type="genre" id={genre.id}>
+                {genre.name}
+            </Button>
         )
     );
 

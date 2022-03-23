@@ -37,23 +37,16 @@ const Genres = () => {
     );
 
     const genresElements = useMemo(() => {
-        return genres.map(item => (
-            <NavLink
-                to={`${item.id}`}
-                key={item.id}
-                className={({ isActive }) => isActive
-                    ? `${classes.genre} ${classes.active}`
-                    : `${classes.genre}`}
+        return genres.map(genre => (
+            <Button
+                type="genre"
+                key={genre.id}
+                onClick={() => onGenreClickHandler()}
+                id={genre.id}
             >
-                <Button
-                    type="genre"
-                    id={item.id}
-                    onClick={() => onGenreClickHandler()}
-                >
-                    {item.name}
-                </Button>
-            </NavLink>
-        ));
+                {genre.name}
+            </Button>
+        ))
     }, [genres]);
 
     const moviesElements = movies.map(movie => (
