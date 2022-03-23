@@ -4,33 +4,6 @@ import Button from "../../UI/Button/Button";
 
 const Description = ({movie, trailers}) => {
 
-    const genresElements = movie.genres.map(genre => (
-            <Button type="genre" id={genre.id}>
-                {genre.name}
-            </Button>
-        )
-    );
-
-    const trailersElements = trailers.length
-        ? trailers.map(trailer => {
-            let { key, name, site, type } = trailer;
-            if (site === "YouTube" && type === "Trailer") {
-                return (
-                    <iframe
-                        key={key}
-                        src={`https://www.youtube.com/embed/${key}`}
-                        title={name}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen>
-                    </iframe>
-                );
-            };
-        })
-        : <div>Трейлеров пока нет</div>;
-
-    const overview = movie.overview ? movie.overview : "Описания пока нет";
-
     let releaseDate = "нет данных";
     if (movie.release_date) {
         let formattedDate = movie.release_date.split("-").reverse();
@@ -77,6 +50,34 @@ const Description = ({movie, trailers}) => {
         releaseDate = formattedDate.join(" ");
     };
 
+    const genresElements = movie.genres.map(genre => (
+            <Button type="genre" id={genre.id}>
+                {genre.name}
+            </Button>
+        )
+    );
+
+    const rating = movie.vote_average ? movie.vote_average : "нет данных";
+
+    const overview = movie.overview ? movie.overview : "Описания пока нет";
+
+    const trailersElements = trailers.length
+        ? trailers.map(trailer => {
+            let { key, name, site, type } = trailer;
+            if (site === "YouTube" && type === "Trailer") {
+                return (
+                    <iframe
+                        key={key}
+                        src={`https://www.youtube.com/embed/${key}`}
+                        title={name}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen>
+                    </iframe>
+                );
+            }
+        }) : <div>Трейлеров пока нет</div>;
+
     return (
         <div className={classes.description}>
             <h2 className={classes.title}>{movie.title || movie.name}</h2>
@@ -85,9 +86,13 @@ const Description = ({movie, trailers}) => {
                 <span>Жанры:</span>
                 {genresElements}
             </div>
-            <div className={classes.rating}>
-                <b>Рейтинг: </b>&#9733; {movie.vote_average}
-            </div>
+            {movie.vote_average
+                ? <div className={classes.rating}>
+                    <b>Рейтинг: </b>&#9733; {rating}
+                </div>
+            : <div>
+                    <b>Рейтинг: </b>{rating}
+                </div>}
             <div><span>Описание:</span>{overview}</div>
             <div className={classes.trailers}>
                 <span>Трейлеры:</span>
