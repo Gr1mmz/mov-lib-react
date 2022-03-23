@@ -52,7 +52,11 @@ const Header = ({setModal, setMobileNavbar}) => {
                             )}
                         </MediaQuery>
                         <MediaQuery maxWidth={991}>
-                            <a className={classes.link} onClick={() => setMobileNavbar(true)}>Меню</a>
+                            <a className={`${classes.link} ${classes.linkBurger}`} onClick={() => setMobileNavbar(true)}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
                         </MediaQuery>
                     </div>
                     <Search/>

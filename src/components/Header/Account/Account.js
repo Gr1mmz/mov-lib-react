@@ -21,10 +21,12 @@ const Account = ({setModal}) => {
             {isLogged
             ? <>
                 <MediaQuery minWidth={576}>
-                    <a href="/" className={classes.link}>Аккаунт</a>
+                    <a href="/" className={classes.link} onClick={(event) => onLoginClick(event)}>Аккаунт</a>
                 </MediaQuery>
                 <MediaQuery maxWidth={575}>
-                    <a href="/" className={`${classes.link} ${classes.linkIcon}`}>
+                    <a href="/"
+                       className={`${classes.link} ${classes.linkIcon}`}
+                       onClick={(event) => onLoginClick(event)}>
                         <img src={userIcon} alt=""/>
                     </a>
                 </MediaQuery>
