@@ -8,6 +8,7 @@
 }
 
 .backdrop {
+    background-size: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -29,4 +30,10 @@
             rgba(0,0,0,0.8463760504201681) 30%,
             rgba(0,0,0,0.5634628851540616) 65%,
             rgba(255,255,255,0) 100%);
+}
+
+@media screen and (max-width: 992px) {
+    .backdrop {
+        background-repeat: no-repeat;
+    }
 }
