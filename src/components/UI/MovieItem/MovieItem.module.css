@@ -129,7 +129,7 @@
 @media screen and (max-width: 576px) {
     .movie {
         width: 45%;
-        height: calc(90%);
+        height: auto;
     }
     .backdrop {
         min-height: 120px;
