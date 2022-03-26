@@ -17,3 +17,7 @@
 - Responsive
 - Preloader
 - CSS Grid
+## Запуск проекта
+1. `git clone https://github.com/Gr1mmz/mov-lib-react.git`
+2. `npm install`
+3. `npm start`
